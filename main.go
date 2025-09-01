@@ -1,7 +1,8 @@
 package main
 
 import (
-	"github.com/nad279444/csrf_token_api/db"
+	"log"
+
 	"github.com/nad279444/csrf_token_api/server"
 	"github.com/nad279444/csrf_token_api/server/middleware/myJwt"
 )
