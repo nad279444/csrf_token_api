@@ -116,6 +116,8 @@ func authHandler(next http.Handler) http.Handler {
 func logicHandler(w http.ResponseWriter, r *http.Request) {
 	// @adam-hanna: I shouldn't be doing this in my middleware!!!!
 	switch r.URL.Path {
+	case "/":
+		templates.RenderTemplate(w, "landing", nil)
 	case "/restricted":
 		csrfSecret := grabCsrfFromReq(r)
 		templates.RenderTemplate(w, "restricted", &templates.RestrictedPage{ csrfSecret, "Hello Nad!" })
@@ -164,9 +166,11 @@ func logicHandler(w http.ResponseWriter, r *http.Request) {
 
 			// check to see if the username is already taken
 			_, uuid, err := db.FetchUserByUsername(strings.Join(r.Form["username"], ""))
+			
 			if err == nil {
 				// templates.RenderTemplate(w, "register", &templates.RegisterPage{ true, "Username not available!" })
 				w.WriteHeader(http.StatusUnauthorized)
+				
 			} else {
 				// nope, now create this user
 				role := "user"

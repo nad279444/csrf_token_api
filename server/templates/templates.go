@@ -21,7 +21,12 @@ type RestrictedPage struct {
 	SecretMessage string
 }
 
-var templates = template.Must(template.ParseFiles("./server/templates/templateFiles/login.tmpl", "./server/templates/templateFiles/register.tmpl", "./server/templates/templateFiles/restricted.tmpl"))
+var templates = template.Must(template.ParseFiles(
+	"./server/templates/templateFiles/landing.tmpl",
+	"./server/templates/templateFiles/login.tmpl",
+	"./server/templates/templateFiles/register.tmpl",
+	"./server/templates/templateFiles/restricted.tmpl",
+))
 
 func RenderTemplate(w http.ResponseWriter, tmpl string, p interface{}) {
 	err := templates.ExecuteTemplate(w, tmpl+".tmpl", p)

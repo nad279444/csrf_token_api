@@ -5,13 +5,19 @@ import (
 
 	"github.com/nad279444/csrf_token_api/server"
 	"github.com/nad279444/csrf_token_api/server/middleware/myJwt"
+	"github.com/nad279444/csrf_token_api/db"
 )
+
+
 
 var host = "localhost"
 var port = "9000"
 
-
 func main() {
+	// init the DB
+	db.InitDB()
+
+	// init the JWTs
 	jwtErr := myJwt.InitJWT()
 	if jwtErr!= nil {
 		log.Println("Error initializing the JWT's!")
